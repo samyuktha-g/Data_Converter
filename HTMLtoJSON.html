@@ -1,0 +1,68 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<!DOCTYPE html>
+<html>
+
+<head>
+</head>
+
+<body>
+
+    <table id="table">
+        <thead>
+            <tr>
+                <th>Student</th>
+                <th>teacher</th>
+                <th>College</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>John</td>
+                <td>jane</td>
+                <td>xyz </td>
+            </tr>
+            <tr>
+                <td>June</td>
+                <td>Amy</td>
+                <td>ABC</td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="3">
+                    <button onclick="submit()"> Submit</button>
+                </td>
+            </tr>
+        </tfoot>
+    </table>
+    <script>
+        function submit() {
+            var Arr = [],
+                Arrvalue_obj = []; // Declare an Array to store the data and further display the stored data
+            $("#table thead tr th").each(function() { // each loop iterates over all the elements of 'tr' i.e., student teacher, college
+                Arr.push($(this).html()); // push adds new item to the Arr Array where new item is current the content (innerHTML) of the selected elements(table thead tr th).
+                console.log("html() value_object: ", $(this).html()); // shows the element
+            });
+            // below function exceutes same as above, only change is, it takes elements under: table tbody tr
+            //html() functin reference link: https://www.w3schools.com/jquery/html_html.asp
+            // push() function ref link: https://www.w3schools.com/jsref/jsref_push.asp#:~:text=The%20push()%20method%20adds,use%20the%20unshift()%20method.
+
+            $("#table tbody tr").each(function() {
+                var value_obj = {},
+                    i = 0;
+                $(this).children("td").each(function() {
+                    value_obj[Arr[i]] = $(this).html();
+                    i++;
+                })
+                Arrvalue_obj.push(value_obj);
+            });
+            // appends body stored Array value_object"Arrvalue_obj" and displays the output.
+            $('body').append(JSON.stringify({
+                Converted_Value: Arrvalue_obj
+            }));
+
+        }
+    </script>
+</body>
+
+</html>
